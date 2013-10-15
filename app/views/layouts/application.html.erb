@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Unisystems Car Booking</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div id="wrap">
+
+    <div id="header"><p style="float: left;">Unisystems</p>
+
+    <% if current_user != nil %>
+      <p style="float: right; font-size: 12px; padding-right: 10px;">You are logged in as <%= current_user.firstname + " " + current_user.lastname %> ( <%= link_to 'Logout', logout_path %> )
+      </p><br/><br/>
+<% end %>
+  
+    </div>
+
+    <div style="clear: both;"></div>
+    <div id="menu">
+      <% if logged_in_as_office? %>
+      <%= link_to 'Manage Cars & Leases', cars_path %> .
+<%= link_to 'Manage Daily Bookings', day_bookings_path %> .
+<%= link_to 'Manage Users', users_path %>.
+      <% elsif logged_in_as_employee? %>
+       
+      <% end %>
+    </div>
+
+<% if flash[:alert] %>
+  <p class="flash-error"><%= flash[:alert] %></p>
+<% end %>
+<% if flash[:notice] %>
+  <p class="flash-notice"><%= flash[:notice] %></p>
+<% end %>
+
+  <div id="content"><%= yield %></div>
+
+  <div id="footer">Unisystems Car Allocation System © Ross Money 2012</div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,32 @@
+<h1>Manage Daily Bookings</h1>
+
+<table>
+  <tr>
+    <th>First Name</th>
+    <th>Last Name</th>
+    <th>Make</th>
+    <th>Model</th>
+    <th>Registration</th>
+    <th>Day</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @day_bookings.each do |day_booking|
+
+user = User.where(["username = ?", day_booking.username]).first
+car = Car.where(["registration = ?", day_booking.registration]).first
+%>
+  <tr>
+    <td><%= user.firstname %></td>
+    <td><%= user.lastname %></td>
+    <td><%= car.make %></td>
+    <td><%= car.model %></td>
+    <td><%= car.registration %></td>
+    <td><%= day_booking.day.strftime("%a %d %Y") %></td>
+    <td><%= link_to 'Free Up Car', day_booking, :method => :delete, :data => { :confirm => 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+

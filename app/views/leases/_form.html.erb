@@ -1,0 +1,61 @@
+<%= form_for(@lease) do |f| %>
+  <% if @lease.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@lease.errors.count, "error") %> prohibited this lease from being saved:</h2>
+
+      <ul>
+        <% @lease.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :username %><br />
+    <%
+    users = User.find(:all, :order => "username")
+    leases = Lease.find(:all)
+    available_users = {}
+    users.each do | user |
+      found = false
+      leases.each do | lease |
+        if user.username == lease.username
+          found = true
+        end
+      end
+      if !found
+        available_users[user.firstname + " " + user.lastname] =  user.username
+      end
+    end
+  %>
+    <%= f.select :username, available_users %>
+  </div>
+  <div class="field">
+    <%= f.label :registration %><br />
+    <% if params[:action] == "new" %>
+      <%= f.select :registration, Car.where(:bookingtype => "longterm" , :longtermassigned => false).collect {|c| [c.make + " " + c.model, c.registration]} %>
+    <% else
+      cars = Car.where(:bookingtype => "longterm")
+      available_cars = {}
+      cars.each do | car |
+        if car.registration == @lease.registration || !car.longtermassigned
+          val = "" + car.make + " " + car.model
+          available_cars[val] = car.registration
+        end
+      end %>
+      <%= f.select :registration, available_cars %>
+    <% end %>
+  </div>
+  <div class="field">
+    <%= f.label :startdate %><br />
+    <%= f.date_select :startdate %>
+  </div>
+  <div class="field">
+    <%= f.label :enddate %><br />
+    <%= f.date_select :enddate %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

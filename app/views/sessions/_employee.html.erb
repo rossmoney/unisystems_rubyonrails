@@ -1,0 +1,21 @@
+<h1>Unisystems Car Booking Employee Menu</h1>
+<%
+ltbooking = Lease.where(["username = ?", current_user.username]).first
+
+if ltbooking != nil
+%>
+  You already have a long term lease of a car!
+<%
+else
+  booking = DayBooking.where(["username = ? AND DATE(day) = ?", current_user.username, Date.today ]).first
+
+  if booking != nil %>
+
+    <%= link_to 'View details of your car for today.', booking %><br />
+
+  <% else %>
+
+    <%= link_to 'Book Car for Day', new_day_booking_path %><br />
+
+  <% end
+end%>

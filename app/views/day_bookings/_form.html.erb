@@ -1,0 +1,46 @@
+<%= form_for(@day_booking) do |f| %>
+  <% if @day_booking.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@day_booking.errors.count, "error") %> prohibited this day_booking from being saved:</h2>
+
+      <ul>
+      <% @day_booking.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% 
+  cars = Car.where(["bookingtype = 'pool'"])
+  available_cars = {}
+  cars.each do | car |
+    bookings = DayBooking.where(["registration = ?", car.registration])
+    val = "" + car.make + " " + car.model
+    if bookings.count == 0
+       available_cars[val] = car.registration
+    else
+      bookings.each do | booking |
+        if booking.day != Date.today
+           available_cars[val] = car.registration
+        end
+      end
+    end
+  end
+  if available_cars.length == 0
+    %>
+    Sorry there are no cars available to book!
+    <%
+  else
+  %>
+  <div class="field">
+    <%= f.label :registration %><br />
+    <%= f.select :registration, available_cars %>
+  </div>
+  <%= f.hidden_field :username, :value => current_user.username %>
+  <%= f.hidden_field :day, :value => Date.today.to_s %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end
+ end %>

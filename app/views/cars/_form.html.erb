@@ -1,0 +1,64 @@
+<%= form_for(@car) do |f| %>
+  <% if @car.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h2>
+
+      <ul>
+      <% @car.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :make %><br />
+    <%= f.text_field :make %>
+  </div>
+  <div class="field">
+    <%= f.label :model %><br />
+    <%= f.text_field :model %>
+  </div>
+  <div class="field">
+    <%= f.label :registration %><br />
+    <%= f.text_field :registration %>
+  </div>
+  <div class = "field">
+    <%= f.label :bookingtype, 'Availability Type' %><br />
+    <%= f.radio_button :bookingtype, 'longterm' %>
+    <%= f.label "car_long_term", "Long Term" %>
+    <%= f.radio_button :bookingtype, 'pool' %>
+    <%= f.label "car_in_pool", "In Pool" %><br />
+  </div>
+  <div class="field">
+    <%= f.label :servicedue, 'Service Due On:' %><br />
+    <%= f.date_select :servicedue %>
+  </div>
+  <div class="field">
+    <%= f.label :lastservice, 'Last Service:' %><br />
+    <%= f.date_select :lastservice %>
+  </div>
+  <% if params[:action] == "new" || params[:action] == "create" %>
+    <%= f.hidden_field :forsale, :value =>false %>
+    <%= f.hidden_field :sold, :value =>false %>
+    <%= f.hidden_field :outofaction, :value =>false %>
+    <%= f.hidden_field :longtermassigned, :value => false %>
+  <% else %>
+    <div class="field">
+      <%= f.label :forsale, 'For Sale?' %><br />
+      <%= f.check_box :forsale %>
+    </div>
+    <div class="field">
+      <%= f.label :sold, 'Sold?' %><br />
+      <%= f.check_box :sold %>
+    </div>
+    <div class="field">
+      <%= f.label :outofaction, 'Out of Action?' %><br />
+      <%= f.check_box :outofaction %>
+    </div>
+    <%= f.hidden_field :longtermassigned %>
+  <% end %>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

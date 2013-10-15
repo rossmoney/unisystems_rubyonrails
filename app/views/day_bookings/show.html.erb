@@ -1,0 +1,21 @@
+<%
+car = Car.where(["registration = ?", @day_booking.registration]).first
+%>
+<p>
+  <b>Make:</b>
+  <%= car.make %>
+</p>
+
+<p>
+  <b>Model:</b>
+  <%= car.model %>
+</p>
+
+<p>
+  <b>Registration:</b>
+  <%= @day_booking.registration %>
+</p>
+
+
+<%= link_to 'Edit', edit_day_booking_path(@day_booking) %> |
+

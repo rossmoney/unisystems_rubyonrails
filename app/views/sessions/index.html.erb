@@ -1,0 +1,15 @@
+<%
+if current_user != nil
+  if logged_in_as_employee?
+  %>
+    <%= render 'employee' %>
+  <%
+  elsif logged_in_as_office?
+  %>
+    <%= render 'office' %>
+  <%
+  end
+else
+  redirect_to login_path
+end
+%>

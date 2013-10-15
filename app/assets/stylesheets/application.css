@@ -1,0 +1,93 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the top of the
+ * compiled file, but it's generally better to create a new file per style scope.
+ *
+ *= require_self
+ *= require_tree .
+ */
+
+body {
+    background-color: #ccffff;
+}
+
+
+#wrap {
+    margin: 0 auto;
+    width: 1000px;
+    background-color: #fff;
+}
+
+#header {
+    background-color: #00248E;
+    height: 100px;
+    display: block;
+}
+
+#header p {
+    font-size: 50px;
+    font-weight: bold;
+    color: #BFCFFE;
+    padding-left: 10px;
+    padding-top: 30px;
+    margin: 0px;
+    display: block;
+}
+
+#menu {
+    background-color: #0033CC;
+    color: #BFCFFE;
+    padding: 10px;
+}
+
+#menu a {
+    color: #BFCFFE;
+}
+
+#content {
+    padding: 10px;
+}
+
+#content table {
+
+}
+
+#content table {
+    border: 1px solid gray;
+    border-spacing: 0px;
+    width: 100%;
+}
+
+#content th, #content table td {
+    border-right: 1px solid gray;
+    border-bottom: 1px solid gray;
+    border-spacing: 0px;
+}
+
+#content th {
+    background-color: #BFCFFE;
+}
+
+#footer
+{
+    text-align: center;
+    font-size: 10px;
+}
+
+.yes, .flash-notice {
+    color: green;
+}
+
+.no, .flash-error {
+    color: red;
+}
+
+.flash-notice, .flash-error {
+    padding: 10px;
+    margin: 0px;
+}

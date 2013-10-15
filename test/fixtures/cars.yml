@@ -1,0 +1,25 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  make: MyString
+  model: MyString
+  registration: MyString
+  bookingtype: MyString
+  servicedue: 2012-10-31
+  lastservice: 2012-10-31
+  longtermassigned: false
+  forsale: false
+  sold: false
+  outofaction: false
+
+two:
+  make: MyString
+  model: MyString
+  registration: MyString
+  bookingtype: MyString
+  servicedue: 2012-10-31
+  lastservice: 2012-10-31
+  longtermassigned: false
+  forsale: false
+  sold: false
+  outofaction: false
